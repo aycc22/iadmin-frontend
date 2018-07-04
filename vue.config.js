@@ -26,12 +26,13 @@ module.exports = {
   baseUrl: BASE_URL,
 
   devServer: {
+    port: 8084,
     proxy: {
       // 设置代理，当请求以 '/api' 开头时，将请求地址转为 'target + path'
       // 例: 请求 '/api/getUser' 转为 'http://localhost:8081/getUser'
       // 可以设置多个代理
       '/api': {
-        target: 'http://localhost:8081',
+        target: 'http://localhost:8083',
         ws: true,
         changeOrigin: true,
         pathRewrite: {

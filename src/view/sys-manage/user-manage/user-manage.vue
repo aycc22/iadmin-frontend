@@ -1,29 +1,40 @@
 <template>
-    <div>
-        <Row>
-            <Col span="24">
-                <Card>
-                    <p slot="title">
-                        <Icon type="person-stalker"></Icon>
-                        系统用户(动态路由)
-                    </p>
-                    <Row type="flex" justify="center" align="middle" class="advanced-router">
-                        <Table border :columns="orderColumns" :data="sysUsers" style="width: 100%;"></Table>
-                    </Row>
-                </Card>
-            </Col>
-            <Button @click="init" type="primary">get users</Button>
-        </Row>
-    </div>
+  <div>
+    <Row>
+        <Col span="24">
+          <Card>
+              <p slot="title">
+                  <Icon type="person-stalker"></Icon>
+                  系统用户
+              </p>
+              <Row type="flex" justify="center" align="middle" class="advanced-router">
+                  <Table border :columns="orderColumns" :data="sysUsers" style="width: 100%;"></Table>
+              </Row>
+              <Modal v-model="showRoleActive" title="角色信息">
+                <Table :columns="roleCol" :data="roleData"></Table>
+              </Modal>
+          </Card>
+        </Col>
+    </Row>
+  </div>
 </template>
 
 <script>
-import { getSysUsers } from '@/api/sys-manage/user-manage'
+import { getSysUsers, getRolesByUsername } from '@/api/sys-manage/user-manage'
 
 export default {
   name: 'mutative-router',
   data () {
     return {
+      showRoleActive: false,
+      roleCol: [
+        { type: 'index', title: '序号', width: 70 },
+        { title: '角色名', key: 'roleName'},
+        { title: '创建时间', key: 'createTime'},
+        { title: '修改时间', key: 'updateTime'},
+        { title: '状态', key: 'deleteStatus'}
+      ],
+      roleData: [],
       orderColumns: [
         { type: 'index', title: '序号', width: 70 },
         { title: '账号', key: 'username' },
@@ -99,14 +110,20 @@ export default {
       })
     },
     showRole (index) {
-      this.$Modal.info({
-        title: '角色信息',
-        content: `Name：${this.sysUsers[index].username}<br>nickname${this.sysUsers[index].nickname}`
+      let userName = this.sysUsers[index].username    
+      return new Promise((resolve, reject) => {
+        getRolesByUsername(userName).then(res => {
+          this.roleData = res.data
+          this.showRoleActive = true
+          resolve()
+        }).catch(err => {
+          reject(err)
+        })
       })
     }
   },
   mounted () {
-    this.init()
+    this.init();
   }
 }
 </script>

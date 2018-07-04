@@ -22,7 +22,7 @@
             <tags-nav :value="$route" @input="handleClick" :list="tagNavList" @on-close="handleCloseTag"/>
           </div>
           <Content>
-            <div class="single-page-con" :style="{left: collapsed?'70px':'210px'}">
+            <div class="single-page-con" :style="{left: collapsed?'60px':'210px'}">
               <div class="single-page">
                 <!-- <keep-alive :include="cacheList"> -->
                 <keep-alive>

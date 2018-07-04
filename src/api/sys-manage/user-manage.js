@@ -6,3 +6,13 @@ export const getSysUsers = () => {
     method: 'get'
   })
 }
+
+export const getRolesByUsername = (username) => {
+  return axios.request({
+    url: '/api/sysUser/getRolesByUsername',
+    params: {
+      username
+    },
+    method: 'get'
+  })
+}

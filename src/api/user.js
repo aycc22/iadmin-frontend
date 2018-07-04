@@ -13,7 +13,7 @@ export const login = ({ userName, password }) => {
 }
 
 export const getUserInfo = (token) => {
-  console.log('使用token获取用户信息', token)
+  // console.log('使用token获取用户信息', token)
   return axios.request({
     url: '/api/home/getInfo',
     params: {

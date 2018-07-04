@@ -23,7 +23,7 @@ class httpRequest {
   interceptors (instance, url) {
     // 添加请求拦截器
     instance.interceptors.request.use(config => {
-      console.log('axios请求拦截器', config)
+      // console.log('axios请求拦截器', config)
       if (!config.url.includes('/users')) {
         // config.headers['x-access-token'] = Cookies.get(TOKEN_KEY)
       }
@@ -38,7 +38,7 @@ class httpRequest {
     // 添加响应拦截器
     instance.interceptors.response.use((res) => {
       let { data } = res
-      console.log('axios响应拦截器', data)
+      // console.log('axios响应拦截器', data)
       const is = this.destroy(url)
       if (!is) {
         setTimeout(() => {

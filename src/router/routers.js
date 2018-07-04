@@ -119,13 +119,40 @@ export default [
     component: Main,
     children: [
       {
+        path: 'dept-manage',
+        name: 'dept-manage',
+        meta: {
+          icon: 'ios-world-outline',
+          title: '系统机构'
+        },
+        component: () => import('@/view/sys-manage/dept-manage/index.vue')
+      },
+      {
         path: 'user-manage',
         name: 'user-manage',
         meta: {
-          icon: 'arrow-graph-up-right',
+          icon: 'person',
           title: '用户管理'
         },
         component: () => import('@/view/sys-manage/user-manage/user-manage.vue')
+      },
+      {
+        path: 'role-manage',
+        name: 'role-manage',
+        meta: {
+          icon: 'ios-world-outline',
+          title: '角色管理'
+        },
+        component: () => import('@/view/sys-manage/role-manage/index.vue')
+      },
+      {
+        path: 'menu-manage',
+        name: 'menu-manage',
+        meta: {
+          icon: 'ios-list-outline',
+          title: '菜单资源'
+        },
+        component: () => import('@/view/sys-manage/menu-manage/index.vue')
       }
     ]
   },
